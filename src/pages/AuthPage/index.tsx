@@ -1,12 +1,12 @@
 //@ts-nocheck
 import * as React from 'react';
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import axios from "axios";
+import AuthStore from "../../core/store/authStore";
 
 import { Styled } from './styled'
 
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -15,7 +15,6 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -37,38 +36,39 @@ function Copyright(props: any) {
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function AuthPage() {
+function AuthPage() {
+	// states
 	const [errorProperty, setErrorProperty] = useState(false);
 	const [isAuthorized, setIsAuthorized] = useState(false)
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-		// event.preventDefault();
-		// const data = new FormData(event.currentTarget);
-		// console.log({
-		// 	email: data.get('email'),
-		// 	password: data.get('password'),
-		// });
-
 		event.preventDefault();
 		const data = new FormData(event.currentTarget);
-		// console.log({
-		// 	email: data.get('email'),
-		// 	password: data.get('password'),
-		// });
-		axios.post('http://192.168.63.98:8000/auth/login', {inn: data.get('email'), password: data.get('password')})
+
+		localStorage.setItem('inn', data.get('email'))
+		localStorage.setItem('password', data.get('password'))
+
+		axios.post('http://192.168.63.98:8000/auth/login', {inn: localStorage.getItem('inn'), password: localStorage.getItem('password')})
 			.then(response => {
 				console.log(response.data.authorized)
 				if (response.data.authorized) {
 					setIsAuthorized(true)
+					localStorage.setItem('isAuthed', true)
+				} else {
+					localStorage.clear()
 				}
 			})
 			.catch(error => {
 				console.log(error.message)
 				setErrorProperty(true)
+				localStorage.clear()
 			})
 	};
 
-	if (isAuthorized) {
+	// if (isAuthorized) {
+	// 	window.location.pathname = '/homepage'
+	// }
+	if (localStorage.getItem('inn') && localStorage.getItem('password')) {
 		window.location.pathname = '/homepage'
 	}
 
@@ -153,3 +153,6 @@ export default function AuthPage() {
 		</ThemeProvider>
 	);
 }
+
+
+export default AuthPage
