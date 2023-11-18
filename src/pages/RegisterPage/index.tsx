@@ -1,24 +1,18 @@
 //@ts-nocheck
-import * as React from 'react';
-import {useContext, useEffect, useState} from "react";
-
+import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
+import {Styled} from "../AuthPage/styled";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import {createTheme, ThemeProvider} from "@mui/material/styles";
+import * as React from "react";
+import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
 import axios from "axios";
-import AuthStore from "../../core/store/authStore";
-
-import { Styled } from './styled'
-
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useNavigate } from "react-router-dom";
 
 
 function Copyright(props: any) {
@@ -37,7 +31,7 @@ function Copyright(props: any) {
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-function AuthPage() {
+function RegisterPage() {
 	const navigate = useNavigate()
 	const [errorProperty, setErrorProperty] = useState(false);
 	const [isAuthorized, setIsAuthorized] = useState(false)
@@ -47,9 +41,10 @@ function AuthPage() {
 		const data = new FormData(event.currentTarget);
 
 		localStorage.setItem('inn', data.get('email'))
+		localStorage.setItem('username', data.get('username'))
 		localStorage.setItem('password', data.get('password'))
 
-		axios.post('https://90b4-94-141-125-224.ngrok-free.app/auth/login', {inn: localStorage.getItem('inn'), password: localStorage.getItem('password')})
+		axios.post('https://90b4-94-141-125-224.ngrok-free.app/auth/sign_up', {inn: localStorage.getItem('inn'),name: localStorage.getItem('username'), password: localStorage.getItem('password')})
 			.then(response => {
 				console.log(response.data.authorized)
 				if (response.data.authorized) {
@@ -75,7 +70,7 @@ function AuthPage() {
 	// 	window.location.pathname = '/homepage'
 	// }
 
-	const mgTopOfPage: number = window.innerHeight / 4.5
+	const mgTopOfPage: number = window.innerHeight / 5
 
 	return (
 		<ThemeProvider theme={defaultTheme}>
@@ -94,7 +89,7 @@ function AuthPage() {
 					{/*</Avatar>*/}
 					<Styled.Header>Цифровой рубль</Styled.Header>
 					<Typography component="h1" variant="h5">
-						Войти
+						Зарегистрироваться
 					</Typography>
 					<Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 						{/* inn */}
@@ -108,6 +103,21 @@ function AuthPage() {
 							autoComplete="email"
 							type="number"
 							error={errorProperty}
+							autoFocus
+						/>
+						{/* username */}
+						<TextField
+							margin="normal"
+							required
+							fullWidth
+							id="username"
+							label="Имя пользователя"
+							name="username"
+							type="username"
+							error={errorProperty}
+							inputProps={{
+								maxLength: 20,
+							}}
 							autoFocus
 						/>
 						{/* password */}
@@ -135,17 +145,17 @@ function AuthPage() {
 							variant="contained"
 							sx={{ mt: 2, mb: 2, py: 2 }}
 						>
-							Войти
+							Зарегистрироваться
 						</Button>
 						<Grid container>
-						{/*	<Grid item xs>*/}
-						{/*		<Link href="#" variant="body2">*/}
-						{/*			Forgot password?*/}
-						{/*		</Link>*/}
-						{/*	</Grid>*/}
+							{/*	<Grid item xs>*/}
+							{/*		<Link href="#" variant="body2">*/}
+							{/*			Forgot password?*/}
+							{/*		</Link>*/}
+							{/*	</Grid>*/}
 							<Grid item>
-								<Link href='/register' variant="body2">
-									{"Нет аккаунта? Зарегистрироваться"}
+								<Link href='/auth' variant="body2">
+									{"Есть аккаунт? Войти"}
 								</Link>
 							</Grid>
 						</Grid>
@@ -154,8 +164,8 @@ function AuthPage() {
 				<Copyright sx={{ mt: 8, mb: 4 }} />
 			</Container>
 		</ThemeProvider>
-	);
+	)
 }
 
 
-export default AuthPage
+export default RegisterPage
