@@ -1,19 +1,35 @@
 import axios from "axios";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
 
+import { baseURL } from "./constants/baseURL";
 
 // GET
-export async function GET(url: string) {
-	try {
-		const response = await axios.get(url)
-			.then(response => {
-				// handle
-			})
-	} catch (error) {
-		console.log(error)
-	}
-}
+// login, balance, transfer
+
+// export async function getLogin(state: any) {
+// 	try {
+// 		const result = await axios.get(`${baseURL}/auth/login`)
+// 			.then(response => {state = response})
+// 	} catch (e) {
+// 		console.log(e)
+// 	}
+// }
+
+// export async function getBalance(state: any) {
+// 	try {
+// 		const result = await axios.get(`${baseURL}/user/balance`)
+// 			.then(response => {state = response})
+// 	} catch (e) {
+// 		console.log(e)
+// 	}
+// }
+// export async function putTransfer(state: any) {
+// 	try {
+// 		const result = await axios.put(`${baseURL}/`, )
+// 	} catch (e) {
+// 		console.log(e)
+// 	}
+// }
+
 
 // POST
-export async function POST(url: string, data: object) {}
+//
