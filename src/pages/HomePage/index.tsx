@@ -1,5 +1,7 @@
 import { Styled } from "./styled";
 
+import { FiSend } from "react-icons/fi";
+
 
 function HomePage() {
 	if (localStorage.getItem('inn') && localStorage.getItem('password') && localStorage.getItem('isAuthed')) {
@@ -9,7 +11,7 @@ function HomePage() {
 				<Styled.BalanceText>Баланс: 0 ₽</Styled.BalanceText>
 
 				<Styled.SectionButtons>
-					<Styled.SendMoneyButton>Отправить деньги</Styled.SendMoneyButton>
+					<Styled.SendMoneyButton><FiSend />Отправить деньги</Styled.SendMoneyButton>
 					<Styled.ReceiveMoneyButton>Получить деньги</Styled.ReceiveMoneyButton>
 				</Styled.SectionButtons>
 			</Styled.HomePage>
