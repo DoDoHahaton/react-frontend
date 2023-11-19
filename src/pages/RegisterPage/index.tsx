@@ -47,7 +47,6 @@ function RegisterPage() {
 		localStorage.setItem('username', data.get('username'))
 		localStorage.setItem('password', data.get('password'))
 
-		axios.post('https://90b4-94-141-125-224.ngrok-free.app/auth/sign_up', {inn: localStorage.getItem('inn'),name: localStorage.getItem('username'), password: localStorage.getItem('password')}, {mode: "no-cors"})
 		axios.post(`${baseURL}/auth/sign_up`, {inn: localStorage.getItem('inn'),name: localStorage.getItem('username'), password: localStorage.getItem('password')})
 			.then(response => {
 				console.log(response.data.authorized)
