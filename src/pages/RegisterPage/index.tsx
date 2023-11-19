@@ -47,7 +47,7 @@ function RegisterPage() {
 		localStorage.setItem('username', data.get('username'))
 		localStorage.setItem('password', data.get('password'))
 
-		axios.post(`${baseURL}/auth/sign_up`, {inn: localStorage.getItem('inn'),name: localStorage.getItem('username'), password: localStorage.getItem('password')})
+		axios.post(`${baseURL}/auth/sign_up`, {inn: localStorage.getItem('inn'),name: localStorage.getItem('username'), password: localStorage.getItem('password')}, {method: "POST"})
 			.then(response => {
 				console.log(response.data.authorized)
 				if (response.data.authorized) {
