@@ -13,6 +13,7 @@ import { QRScanner } from "../../components/logic/QRScanner/QRScanner";
 
 import { FiSend } from "react-icons/fi";
 import { IoQrCodeOutline } from "react-icons/io5";
+import { CiLogout } from "react-icons/ci";
 import {StyledBtn} from "../../components/UI/SendMoneyBtn/styled";
 
 
@@ -39,6 +40,10 @@ function HomePage() {
 
 						<Link to='/moneyReceivePage'>
 							<Styled.ReceiveMoneyButton><IoQrCodeOutline color='white' size='2rem' />Получить деньги</Styled.ReceiveMoneyButton>
+						</Link>
+
+						<Link to='/signOut'>
+							<Styled.SignOutButton><CiLogout />Выйти</Styled.SignOutButton>
 						</Link>
 					</Styled.SectionButtons>
 				</Styled.HomePage>

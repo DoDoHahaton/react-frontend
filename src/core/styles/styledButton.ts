@@ -6,7 +6,6 @@ export const styledButton = styled.button`
   gap: 0.5rem;
   justify-content: center;
   
-  
   width: 100%;
   max-width: 100rem;
 
@@ -17,12 +16,4 @@ export const styledButton = styled.button`
   background-color: #4343ff;
   border: 1px solid ;
   border-radius: 1rem;
-  
-  transition: all 0.2s ease-in-out;
-  
-  //&:hover {
-	//color: ;
-	//background-color: ;
-	//border: ;
-  //}
 `

@@ -9,6 +9,7 @@ import MoneyReceivePage from "../pages/MoneyReceivePage";
 import MoneySendPage from "../pages/MoneySendPage";
 import CommitTransactionPage from "../pages/CommitTransactionPage";
 import SuccessTransactionPage from "../pages/SuccessTransactionPage";
+import SignOutPage from "../pages/SignOutPage";
 
 
 export function RoutesComponent() {
@@ -24,6 +25,8 @@ export function RoutesComponent() {
 
 				<Route path='/commitTransaction' element={ <CommitTransactionPage /> } />
 				<Route path='/successTransaction' element={ <SuccessTransactionPage /> } />
+
+				<Route path='/signOut' element={ <SignOutPage /> } />
 			</Routes>
 		</Router>
 	)

@@ -35,4 +35,5 @@ export const Styled = {
 	`,
 	SendMoneyButton: styled(styledButton)``,
 	ReceiveMoneyButton: styled(styledButton)``,
+	SignOutButton: styled(styledButton)``,
 }
