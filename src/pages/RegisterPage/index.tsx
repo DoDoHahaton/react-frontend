@@ -13,7 +13,9 @@ import {createTheme, ThemeProvider} from "@mui/material/styles";
 import * as React from "react";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
+
 import axios from "axios";
+import {baseURL} from "../../core/constants/baseURL";
 
 
 function Copyright(props: any) {
@@ -45,7 +47,11 @@ function RegisterPage() {
 		localStorage.setItem('username', data.get('username'))
 		localStorage.setItem('password', data.get('password'))
 
+<<<<<<< HEAD
 		axios.post('https://90b4-94-141-125-224.ngrok-free.app/auth/sign_up', {inn: localStorage.getItem('inn'),name: localStorage.getItem('username'), password: localStorage.getItem('password')}, {mode: "no-cors"})
+=======
+		axios.post(`${baseURL}/auth/sign_up`, {inn: localStorage.getItem('inn'),name: localStorage.getItem('username'), password: localStorage.getItem('password')})
+>>>>>>> a52a2d87f5169e22304e7af68c34a341f4254f75
 			.then(response => {
 				console.log(response.data.authorized)
 				if (response.data.authorized) {
