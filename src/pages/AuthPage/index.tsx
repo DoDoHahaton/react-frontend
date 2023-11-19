@@ -4,6 +4,7 @@ import {useContext, useEffect, useState} from "react";
 
 import axios from "axios";
 import AuthStore from "../../core/store/authStore";
+import {baseURL} from "../../core/constants/baseURL";
 
 import { Styled } from './styled'
 
@@ -49,7 +50,7 @@ function AuthPage() {
 		localStorage.setItem('inn', data.get('email'))
 		localStorage.setItem('password', data.get('password'))
 
-		axios.post('https://90b4-94-141-125-224.ngrok-free.app/auth/login', {inn: localStorage.getItem('inn'), password: localStorage.getItem('password')})
+		axios.post(`${baseURL}/auth/login`, {inn: localStorage.getItem('inn'), password: localStorage.getItem('password')})
 			.then(response => {
 				console.log(response.data.authorized)
 				if (response.data.authorized) {
@@ -74,6 +75,9 @@ function AuthPage() {
 	// if (localStorage.getItem('inn') && localStorage.getItem('password')) {
 	// 	window.location.pathname = '/homepage'
 	// }
+	if (localStorage.getItem('inn') && localStorage.getItem('password')) {
+		window.location.pathname = '/homepage'
+	}
 
 	const mgTopOfPage: number = window.innerHeight / 4.5
 
@@ -144,7 +148,7 @@ function AuthPage() {
 						{/*		</Link>*/}
 						{/*	</Grid>*/}
 							<Grid item>
-								<Link href='/register' variant="body2">
+								<Link href="/register" variant="body2">
 									{"Нет аккаунта? Зарегистрироваться"}
 								</Link>
 							</Grid>
