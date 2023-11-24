@@ -1,2 +1,2 @@
 // @ts-nocheck
-export const baseURL: string = 'https://9d7e-94-141-125-224.ngrok-free.app/'
+export const baseURL: string = 'https://0ee7-45-137-113-230.ngrok-free.app/'
